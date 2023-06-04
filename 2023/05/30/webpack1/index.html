@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>webpack1 | LEMON</title><meta name="author" content="Lemon"><meta name="copyright" content="Lemon"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前端工程化：在实际开发中会使用命令工具CLI一键生成带有webpack的项目layUi：elementui vantui 等模块化 (js css 资源的复用叫模块化)组件化 (ui结构 样式 行为的复用叫组件化)规范化(目录结果的划分，编码规范化，接口规范化，文档规范化，git分支管理)自动化(自动化构建，自动部署，自动化测试)前端工程化：在企业的前端项目开发中，把前端开发所需的工具，技术，流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack1">
+<meta property="og:url" content="https://zsn-github.github.io/2023/05/30/webpack1/index.html">
+<meta property="og:site_name" content="LEMON">
+<meta property="og:description" content="前端工程化：在实际开发中会使用命令工具CLI一键生成带有webpack的项目layUi：elementui vantui 等模块化 (js css 资源的复用叫模块化)组件化 (ui结构 样式 行为的复用叫组件化)规范化(目录结果的划分，编码规范化，接口规范化，文档规范化，git分支管理)自动化(自动化构建，自动部署，自动化测试)前端工程化：在企业的前端项目开发中，把前端开发所需的工具，技术，流程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://lc-3rvf2x8x.cn-e1.lcfile.com/G4cS5oHYxCcT4YV07fXl5PQAbU2R4jmr/lemon.png">
+<meta property="article:published_time" content="2023-05-30T09:14:07.000Z">
+<meta property="article:modified_time" content="2023-06-04T06:48:42.616Z">
+<meta property="article:author" content="Lemon">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://lc-3rvf2x8x.cn-e1.lcfile.com/G4cS5oHYxCcT4YV07fXl5PQAbU2R4jmr/lemon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://zsn-github.github.io/2023/05/30/webpack1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'webpack1',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2023-06-04 14:48:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="http://lc-3rvf2X8x.cn-e1.lcfile.com/G4cS5oHYxCcT4YV07fXl5PQAbU2R4jmr/lemon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://lc-3rvf2X8x.cn-e1.lcfile.com/sI91CeH9PdIGb9mqb0BbN9b6rOkkCu4X/%E5%90%91%E6%97%A5%E8%91%B5.png')"><nav id="nav"><span id="blog-info"><a href="/" title="LEMON"><span class="site-name">LEMON</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">webpack1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-30T09:14:07.000Z" title="发表于 2023-05-30 17:14:07">2023-05-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-04T06:48:42.616Z" title="更新于 2023-06-04 14:48:42">2023-06-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/webpack/">webpack</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="webpack1"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="前端工程化："><a href="#前端工程化：" class="headerlink" title="前端工程化："></a><strong>前端工程化：</strong></h2><p>在实际开发中会使用命令工具CLI一键生成带有webpack的项目<br>layUi：elementui vantui 等<br>模块化 (js css 资源的复用叫模块化)<br>组件化 (ui结构 样式 行为的复用叫组件化)<br>规范化(目录结果的划分，编码规范化，接口规范化，文档规范化，git分支管理)<br>自动化(自动化构建，自动部署，自动化测试)<br>前端工程化：在企业的前端项目开发中，把前端开发所需的工具，技术，流程，经验等进行规范化。<br>企业中的vue项目和react项目，都是基于工程化的方式进行开发的<br>前端开发自成体系，有一套标准的开发方案和流程。</p>
+<h3 id="Webpack：前端工程化的具体解决方案，webpack是模块打包机"><a href="#Webpack：前端工程化的具体解决方案，webpack是模块打包机" class="headerlink" title="Webpack：前端工程化的具体解决方案，webpack是模块打包机"></a><strong>Webpack：前端工程化的具体解决方案，webpack是模块打包机</strong></h3><p>它提供了友好的前端模块化开发支持，以及****代码压缩混淆*<em><strong>，</strong></em>*处理浏览器端javascript的兼容性*<em><strong>，</strong></em>*性能优化****等强大的功能。</p>
+<h4 id="Webpack的基本使用："><a href="#Webpack的基本使用：" class="headerlink" title="Webpack的基本使用："></a><strong>Webpack的基本使用：</strong></h4><p>新建项目空白目录，并运行npm init -y命令，初始化包管理配置文集package.json</p>
+<p>新建src源代码目录</p>
+<p>新建src-&gt;index.html首页和src-&gt;index.js脚本文件</p>
+<p>初始化首页基本结构</p>
+<p>运行npm install jquery -S命令，安装jquery</p>
+<p>通过ES6模块化的方式导入jQuery，实现效果&#x2F;&#x2F; import $ from ‘jquery’ &#x2F;&#x2F;$(function(){}})</p>
+<h4 id="Webpack的安装："><a href="#Webpack的安装：" class="headerlink" title="Webpack的安装："></a><strong>Webpack的安装：</strong></h4><p>安装两个包：npm install <a href="mailto:&#119;&#101;&#x62;&#112;&#97;&#x63;&#x6b;&#x40;&#x35;&#46;&#x34;&#x32;&#x2e;&#49;">&#119;&#101;&#x62;&#112;&#97;&#x63;&#x6b;&#x40;&#x35;&#46;&#x34;&#x32;&#x2e;&#49;</a> <a href="mailto:&#119;&#x65;&#x62;&#112;&#x61;&#x63;&#x6b;&#45;&#x63;&#x6c;&#105;&#x40;&#52;&#46;&#x37;&#x2e;&#x32;">&#119;&#x65;&#x62;&#112;&#x61;&#x63;&#x6b;&#45;&#x63;&#x6c;&#105;&#x40;&#52;&#46;&#x37;&#x2e;&#x32;</a> -D</p>
+<h4 id="Webpack的配置："><a href="#Webpack的配置：" class="headerlink" title="Webpack的配置："></a><strong>Webpack的配置：</strong></h4><p>在项目根目录中，创建名为webpack.config.js的webpack配置文件，并初始化如下的基本配置：</p>
+<p><code>module.exports = &#123;</code></p>
+<p><code>mode: &#39;development&#39; // mode用来指定构建模式，可选值有development和production</code></p>
+<p><code>&#125;</code></p>
+<p>在package.json的脚本scripts节点下，新增dev脚本如下：</p>
+<p><code>&quot;scripts&quot;: &#123;</code></p>
+<p><code>&quot;dev&quot;: &quot;webpack&quot; // script节点下的脚本，可以通过npm run 执行，例如npm run dev</code></p>
+<p><code>&#125;</code></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://zsn-github.github.io">Lemon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zsn-github.github.io/2023/05/30/webpack1/">https://zsn-github.github.io/2023/05/30/webpack1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zsn-github.github.io" target="_blank">LEMON</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Web/">Web</a></div><div class="post_share"><div class="social-share" data-image="http://lc-3rvf2X8x.cn-e1.lcfile.com/G4cS5oHYxCcT4YV07fXl5PQAbU2R4jmr/lemon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/04/08/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="http://lc-3rvf2X8x.cn-e1.lcfile.com/G4cS5oHYxCcT4YV07fXl5PQAbU2R4jmr/lemon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lemon</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zsn-github" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://wx.mail.qq.com/login/loginpage?auth_type=3" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">前端工程化：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Webpack%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9A%84%E5%85%B7%E4%BD%93%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%8Cwebpack%E6%98%AF%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%E6%9C%BA"><span class="toc-number">1.1.</span> <span class="toc-text">Webpack：前端工程化的具体解决方案，webpack是模块打包机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Webpack%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">Webpack的基本使用：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Webpack%E7%9A%84%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-number">1.1.2.</span> <span class="toc-text">Webpack的安装：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Webpack%E7%9A%84%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">1.1.3.</span> <span class="toc-text">Webpack的配置：</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/30/webpack1/" title="webpack1">webpack1</a><time datetime="2023-05-30T09:14:07.000Z" title="发表于 2023-05-30 17:14:07">2023-05-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/08/hello-world/" title="Hello World">Hello World</a><time datetime="2023-04-08T02:14:23.418Z" title="发表于 2023-04-08 10:14:23">2023-04-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Lemon</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>
